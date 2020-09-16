@@ -63,13 +63,11 @@ fetch('attractions.json')
 
         let selectBox = document.querySelector("#attraction-category");
 
-        console.log(selectBox.value)
         filterData(selectBox);
 
         selectBox.addEventListener('change',changeFunction);
 
         function changeFunction(){
-            console.log(selectBox.value);
             filterData(selectBox);
         }
       
