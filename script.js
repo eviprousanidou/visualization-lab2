@@ -21,9 +21,8 @@ fetch('attractions.json')
 	        * - the max. length of 'data' is 5
 	        *
 	        * **************************************************/
-           
-            console.log(category)
-            if (category == null|| "all" ) {
+
+            if (category.value == null|| category.value == "all" ) {
 
                 //sort the data on visitors
                 attractions.sort(function(a,b){
@@ -36,13 +35,16 @@ fetch('attractions.json')
                 //get BarChart with topfive
                 renderBarChart(topfive);
 
-            } else {
+            } 
+            else {
 
-                //filter data according to the category
-                let filteredData = attractions.filter(attractions=> attractions.Category == category)
+                //Filter data according to the category selected
 
-                console.log(filteredData)
-                //sort filtered data on visitors
+                let filteredData = attractions.filter(function(a){
+                    return a.Category == category.value;
+                });
+
+                //sort the data on visitors
                 filteredData.sort((a,b)=>{
                     return a.visitors > b.visitors;
                 });
@@ -60,16 +62,16 @@ fetch('attractions.json')
         //       Call filterData with the selected category
 
         let selectBox = document.querySelector("#attraction-category");
-        console.log(selectBox)
 
-
+        console.log(selectBox.value)
         filterData(selectBox);
 
-        
-     
+        selectBox.addEventListener('change',changeFunction);
 
-
-
+        function changeFunction(){
+            console.log(selectBox.value);
+            filterData(selectBox);
+        }
       
     })
 
